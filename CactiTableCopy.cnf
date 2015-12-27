@@ -1,0 +1,16 @@
+{
+	Cacti01 => {
+		db_r_user     => 'cacti',
+		db_r_pass     => 'cacti01',
+		db_r_host     => 'cacti01',
+		db_r_port     => '3306',
+		db_r_database => 'cacti'
+	},
+	Cacti02 => {
+		db_r_user     => 'cacti',
+		db_r_pass     => 'cacti02',
+		db_r_host     => 'cacti02',
+		db_r_port     => '3306',
+		db_r_database => 'cacti',
+	}
+};
