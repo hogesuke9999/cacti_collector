@@ -29,6 +29,7 @@ sub delete_table_graph_templates_item {
 
 	my $sql_r, $sth_r, $arr_r_ref;
 	my $sql_w, $sth_w, $arr_w_ref;
+	my $sql_w2, $sth_w2, $arr_w2_ref;
 
 	print "***** Delete Table Name = graph_templates_item *****\n";
 
@@ -48,10 +49,9 @@ sub delete_table_graph_templates_item {
 		$sth_r->finish;
 
 		if($id_exist < 1) {
-			$sql_w = "delete from graph_templates_item where ref_id = '" . $TABLE_ref_id . "' and ref_hostname = '" . $db_r_host . "';";
-#			$sth_w = $db_w->prepare($sql_w);
-#			$sth_w->execute;
+			$sql_w2 = "delete from graph_templates_item where ref_id = '" . $TABLE_ref_id . "' and ref_hostname = '" . $db_r_host . "';";
 			print "Delete : " . $sql_w . "\n";
+	        	$db_w->do($sql_w2);
 		}
 	}
 }
