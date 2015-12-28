@@ -1,15 +1,15 @@
 {
-	Cacti01 => {
+	LabCacti02 => {
 		db_r_user     => 'cacti',
-		db_r_pass     => 'cacti01',
-		db_r_host     => 'cacti01',
+		db_r_pass     => 'cactipass',
+		db_r_host     => 'LabCacti02.dias.local',
 		db_r_port     => '3306',
 		db_r_database => 'cacti'
 	},
-	Cacti02 => {
+	LabCacti03 => {
 		db_r_user     => 'cacti',
-		db_r_pass     => 'cacti02',
-		db_r_host     => 'cacti02',
+		db_r_pass     => 'cactipass',
+		db_r_host     => 'LabCacti03.dias.local',
 		db_r_port     => '3306',
 		db_r_database => 'cacti',
 	}
