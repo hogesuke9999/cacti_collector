@@ -83,9 +83,9 @@ for my $Collect_host_name (sort keys %$Collect_host) {
 
 	# データ削除処理
 	&delete_table_graph_templates_item($db_w, $db_r, $db_r_host);
-#	&delete_table_data_local($db_w, $db_r, $db_r_host);
-#	&delete_table_data_template_data($db_w, $db_r, $db_r_host);
-#	&delete_table_data_template_rrd($db_w, $db_r, $db_r_host);
+	&delete_table_data_local($db_w, $db_r, $db_r_host);
+	&delete_table_data_template_data($db_w, $db_r, $db_r_host);
+	&delete_table_data_template_rrd($db_w, $db_r, $db_r_host);
 #	&delete_table_graph_local($db_w, $db_r, $db_r_host);
 #	&delete_table_graph_templates_graph($db_w, $db_r, $db_r_host);
 #	&delete_table_host($db_w, $db_r, $db_r_host);

@@ -1,15 +1,30 @@
 #!/bin/perl
 
-# Table Name = data_template_data_rra
+# Table Name = data_template_rrd
 #
-# +-----------------------+-----------------------+------+-----+---------+-------+
-# | Field                 | Type                  | Null | Key | Default | Extra |
-# +-----------------------+-----------------------+------+-----+---------+-------+
-# | data_template_data_id | mediumint(8) unsigned | NO   | PRI | 0       |       |
-# | rra_id                | mediumint(8) unsigned | NO   | PRI | 0       |       |
-# +-----------------------+-----------------------+------+-----+---------+-------+
+# +----------------------------+-----------------------+------+-----+---------+----------------+
+# | Field                      | Type                  | Null | Key | Default | Extra          |
+# +----------------------------+-----------------------+------+-----+---------+----------------+
+# | id                         | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+# | hash                       | varchar(32)           | NO   |     |         |                |
+# | local_data_template_rrd_id | mediumint(8) unsigned | NO   | MUL | 0       |                |
+# | local_data_id              | mediumint(8) unsigned | NO   | MUL | 0       |                |
+# | data_template_id           | mediumint(8) unsigned | NO   | MUL | 0       |                |
+# | t_rrd_maximum              | char(2)               | YES  |     | NULL    |                |
+# | rrd_maximum                | varchar(20)           | NO   |     | 0       |                |
+# | t_rrd_minimum              | char(2)               | YES  |     | NULL    |                |
+# | rrd_minimum                | varchar(20)           | NO   |     | 0       |                |
+# | t_rrd_heartbeat            | char(2)               | YES  |     | NULL    |                |
+# | rrd_heartbeat              | mediumint(6)          | NO   |     | 0       |                |
+# | t_data_source_type_id      | char(2)               | YES  |     | NULL    |                |
+# | data_source_type_id        | smallint(5)           | NO   |     | 0       |                |
+# | t_data_source_name         | char(2)               | YES  |     | NULL    |                |
+# | data_source_name           | varchar(19)           | NO   |     |         |                |
+# | t_data_input_field_id      | char(2)               | YES  |     | NULL    |                |
+# | data_input_field_id        | mediumint(8) unsigned | NO   |     | 0       |                |
+# +----------------------------+-----------------------+------+-----+---------+----------------+
 
-sub delete_table_data_template_data_rra {
+sub delete_table_data_template_rrd {
 	# 引数の受理
 	my ( $db_w, $db_r, $db_r_host) = @_;
 
