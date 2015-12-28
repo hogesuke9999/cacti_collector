@@ -34,7 +34,7 @@ sub delete_table_graph_templates_item {
 
 	$sql_w = "select ref_id from graph_templates_item where ref_hostname = '" . $db_r_host . "';";
 print "SQL = " . $sql_w . "\n";
-	$sth_w = $db_r->prepare($sql_w);
+	$sth_w = $db_w->prepare($sql_w);
 	$sth_w->execute;
 
 	while (my $arr_ref = $sth_w->fetchrow_arrayref) {
