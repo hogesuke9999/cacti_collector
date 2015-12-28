@@ -96,7 +96,7 @@ print "ref_id = " . $TABLE_ref_id . "\n";
 #	        	print "SQL(data_local) -> ", $sql_w, "\n";
 #	        	$db_w->do($sql_w);
 #	        }
-#	}
+	}
 #	$sth_r->finish;
 }
 
