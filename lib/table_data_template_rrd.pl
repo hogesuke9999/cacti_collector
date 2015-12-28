@@ -115,7 +115,7 @@ sub copy_table_data_template_rrd {
 	        $arr_w_ref = $sth_w->fetchrow_arrayref;
 	        my ($data_template_rrd_duplicate) = @$arr_w_ref;
 	        $sth_w->finish;
-
+print "SQL = " . $sql_w . "\n";
 	        if($data_template_rrd_duplicate == 0) {
 	                $sql_w = "insert into data_template_rrd (
 	        		hash,

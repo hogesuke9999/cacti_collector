@@ -171,9 +171,9 @@ sub copy_table_poller_item {
 				'" . $TABLE_arg2 . "',
 				'" . $TABLE_arg3 . "'
 			);";
+			print "SQL(poller_item) -> ", $sql_w, "\n";
+			$db_w->do($sql_w);
 		}
-		print "SQL(poller_item) -> ", $sql_w, "\n";
-		$db_w->do($sql_w);
 	}
 	$sth_r->finish;
 }
