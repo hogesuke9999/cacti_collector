@@ -47,7 +47,12 @@ sub delete_table_graph_templates_item {
 		my ($id_exist) = @$arr_r_ref;
 		$sth_r->finish;
 
-		print "ref_id = " . $TABLE_ref_id . " : " . $id_exist . "\n";
+		if($id_exist < 1) {
+			$sql_w = "delete from graph_templates_item where ref_id = '" . $TABLE_ref_id . "' and ref_hostname = '" . $db_r_host . "';";
+#			$sth_w = $db_w->prepare($sql_w);
+#			$sth_w->execute;
+			print "Delete : " . $sql_w . "\n";
+		}
 	}
 }
 
