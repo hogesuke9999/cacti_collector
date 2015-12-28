@@ -19,6 +19,12 @@ require "./lib/table_data_input_data.pl";
 require "./lib/table_data_template_data_rra.pl";
 require "./lib/table_poller_item.pl";
 require "./lib/delete_table_graph_templates_item.pl";
+require "./lib/delete_table_data_local.pl";
+require "./lib/delete_table_data_template_data.pl";
+require "./lib/delete_table_data_template_rrd.pl";
+require "./lib/delete_table_graph_local.pl";
+require "./lib/delete_table_graph_templates_graph.pl";
+require "./lib/delete_table_host.pl";
 
 # 書き込み用の接続設定
 my $db_w_user = 'cacti';
@@ -77,6 +83,12 @@ for my $Collect_host_name (sort keys %$Collect_host) {
 
 	# データ削除処理
 	&delete_table_graph_templates_item($db_w, $db_r, $db_r_host);
+#	&delete_table_data_local($db_w, $db_r, $db_r_host);
+#	&delete_table_data_template_data($db_w, $db_r, $db_r_host);
+#	&delete_table_data_template_rrd($db_w, $db_r, $db_r_host);
+#	&delete_table_graph_local($db_w, $db_r, $db_r_host);
+#	&delete_table_graph_templates_graph($db_w, $db_r, $db_r_host);
+#	&delete_table_host($db_w, $db_r, $db_r_host);
 
 	# 読み込み用接続 (コピー先) の切断
 	$db_r->disconnect or warn $db_r->errstr;
