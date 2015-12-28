@@ -18,6 +18,7 @@ require "./lib/table_graph_templates_item.pl";
 require "./lib/table_data_input_data.pl";
 require "./lib/table_data_template_data_rra.pl";
 require "./lib/table_poller_item.pl";
+require "./lib/delete_table_graph_templates_item.pl";
 
 # 書き込み用の接続設定
 my $db_w_user = 'cacti';
@@ -57,22 +58,25 @@ for my $Collect_host_name (sort keys %$Collect_host) {
 	my $db_r = DBI->connect("DBI:mysql:$db_r_database:$db_r_host:$db_r_port", $db_r_user, $db_r_pass)
 	 or die "読み込み用(コピー元)の接続に失敗しました: $DBI::errstr";
 
-	# Devices関連の登録
-	&copy_table_host($db_w, $db_r, $db_r_host);
-	&copy_table_host_snmp_query($db_w, $db_r, $db_r_host);
-	&copy_table_host_snmp_cache($db_w, $db_r, $db_r_host);
-	&copy_table_poller_reindex($db_w, $db_r, $db_r_host);
+#	# Devices関連の登録
+#	&copy_table_host($db_w, $db_r, $db_r_host);
+#	&copy_table_host_snmp_query($db_w, $db_r, $db_r_host);
+#	&copy_table_host_snmp_cache($db_w, $db_r, $db_r_host);
+#	&copy_table_poller_reindex($db_w, $db_r, $db_r_host);
 
-	# Data Sources関連の登録
-	&copy_table_data_local($db_w, $db_r, $db_r_host);
-	&copy_table_data_template_data($db_w, $db_r, $db_r_host);
-	&copy_table_data_template_rrd($db_w, $db_r, $db_r_host);
-	&copy_table_graph_local($db_w, $db_r, $db_r_host);
-	&copy_table_graph_templates_graph($db_w, $db_r, $db_r_host);
-	&copy_table_graph_templates_item($db_w, $db_r, $db_r_host);
-	&copy_table_data_input_data($db_w, $db_r, $db_r_host);
-	&copy_table_data_template_data_rra($db_w, $db_r, $db_r_host);
-	&copy_table_poller_item($db_w, $db_r, $db_r_host);
+#	# Data Sources関連の登録
+#	&copy_table_data_local($db_w, $db_r, $db_r_host);
+#	&copy_table_data_template_data($db_w, $db_r, $db_r_host);
+#	&copy_table_data_template_rrd($db_w, $db_r, $db_r_host);
+#	&copy_table_graph_local($db_w, $db_r, $db_r_host);
+#	&copy_table_graph_templates_graph($db_w, $db_r, $db_r_host);
+#	&copy_table_graph_templates_item($db_w, $db_r, $db_r_host);
+#	&copy_table_data_input_data($db_w, $db_r, $db_r_host);
+#	&copy_table_data_template_data_rra($db_w, $db_r, $db_r_host);
+#	&copy_table_poller_item($db_w, $db_r, $db_r_host);
+
+	# データ削除処理
+	&delete_table_graph_templates_item($db_w, $db_r, $db_r_host);
 
 	# 読み込み用接続 (コピー先) の切断
 	$db_r->disconnect or warn $db_r->errstr;
