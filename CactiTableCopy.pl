@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use DBI;
 
+# 各テーブル登録用モジュールの読み込み
 require "./lib/table_host.pl";
 require "./lib/table_host_snmp_query.pl";
 require "./lib/table_host_snmp_cache.pl";
@@ -18,19 +19,15 @@ require "./lib/table_data_input_data.pl";
 require "./lib/table_data_template_data_rra.pl";
 require "./lib/table_poller_item.pl";
 
-# my $db_r_user = 'cacti';
-# my $db_r_pass = 'cactipass';
-# my $db_r_host = 'LabCacti02.dias.local';
-# my $db_r_port = '3306';
-# my $db_r_database = 'cacti';
-
+# 書き込み用の接続設定
 my $db_w_user = 'cacti';
 my $db_w_pass = 'cactipass';
 my $db_w_host = 'localhost';
 my $db_w_port = '3306';
 my $db_w_database = 'cacti';
 
-my $conf_file = "./CactiTableCopy2.cnf";
+# 読み込み用の接続設定の設定
+my $conf_file = "./CactiTableCopy.cnf";
 my $Collect_host = require $conf_file;
 
 # 書き込み用接続 (コピー先)
@@ -60,11 +57,13 @@ for my $Collect_host_name (sort keys %$Collect_host) {
 	my $db_r = DBI->connect("DBI:mysql:$db_r_database:$db_r_host:$db_r_port", $db_r_user, $db_r_pass)
 	 or die "読み込み用(コピー元)の接続に失敗しました: $DBI::errstr";
 
+	# Devices関連の登録
 	&copy_table_host($db_w, $db_r, $db_r_host);
 	&copy_table_host_snmp_query($db_w, $db_r, $db_r_host);
 	&copy_table_host_snmp_cache($db_w, $db_r, $db_r_host);
 	&copy_table_poller_reindex($db_w, $db_r, $db_r_host);
 
+	# Data Sources関連の登録
 	&copy_table_data_local($db_w, $db_r, $db_r_host);
 	&copy_table_data_template_data($db_w, $db_r, $db_r_host);
 	&copy_table_data_template_rrd($db_w, $db_r, $db_r_host);
