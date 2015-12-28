@@ -33,12 +33,18 @@ sub delete_table_graph_templates_item {
 	print "***** Delete Table Name = graph_templates_item *****\n";
 
 	$sql_w = "select ref_id from graph_templates_item where ref_hostname = '" . $db_r_host . "';";
+print "SQL = " . $sql_w . "\n";
 	$sth_w = $db_r->prepare($sql_r);
 	$sth_w->execute;
 
 	while (my $arr_ref = $sth_w->fetchrow_arrayref) {
 		my ($TABLE_ref_id) = @$arr_ref;
-print "ref_id = " . $TABLE_ref_id . "\n";
+		print "ref_id = " . $TABLE_ref_id . "\n";
+	}
+#	$sth_r->finish;
+}
+
+1;
 
 #		$sql_w = "select id from data_template where hash = '" . $TABLE_data_template_hash . "';";
 #		$sth_w = $db_w->prepare($sql_w);
@@ -96,8 +102,3 @@ print "ref_id = " . $TABLE_ref_id . "\n";
 #	        	print "SQL(data_local) -> ", $sql_w, "\n";
 #	        	$db_w->do($sql_w);
 #	        }
-	}
-#	$sth_r->finish;
-}
-
-1;
