@@ -33,15 +33,22 @@ sub delete_table_graph_templates_item {
 	print "***** Delete Table Name = graph_templates_item *****\n";
 
 	$sql_w = "select ref_id from graph_templates_item where ref_hostname = '" . $db_r_host . "';";
-print "SQL = " . $sql_w . "\n";
 	$sth_w = $db_w->prepare($sql_w);
 	$sth_w->execute;
 
 	while (my $arr_ref = $sth_w->fetchrow_arrayref) {
 		my ($TABLE_ref_id) = @$arr_ref;
-		print "ref_id = " . $TABLE_ref_id . "\n";
+
+		$sql_r = "select count(*) from graph_templates_item where id = '" . $TABLE_ref_id . "';";
+		$sth_r = $db_r->prepare($sql_r);
+		$sth_r->execute;
+
+		$arr_r_ref = $sth_r->fetchrow_arrayref;
+		my ($id_exist) = @$arr_r_ref;
+		$sth_r->finish;
+
+		print "ref_id = " . $TABLE_ref_id . " : " . $id_exist . "\n";
 	}
-#	$sth_r->finish;
 }
 
 1;
