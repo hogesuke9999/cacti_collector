@@ -44,6 +44,7 @@ sub copy_table_data_local {
 		) = @$arr_ref;
 
 		$sql_w = "select id from data_template where hash = '" . $TABLE_data_template_hash . "';";
+print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
@@ -51,6 +52,7 @@ sub copy_table_data_local {
 		$sth_w->finish;
 
 		$sql_w = "select id from snmp_query where hash = '" . $TABLE_snmp_query_hash . "';";
+print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
@@ -61,6 +63,7 @@ sub copy_table_data_local {
 		#  変換前 : $TABLE_host_id
 		#  変換後 : $NEW_host_id
 		$sql_w = "select id from host where ref_id = '" . $TABLE_host_id . "' and ref_hostname = '" . $db_r_host . "';";
+print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
@@ -74,6 +77,7 @@ sub copy_table_data_local {
 	        and   snmp_index = '" .       $TABLE_snmp_index . "'
 	        and   ref_id = '" .           $TABLE_id . "'
 	        and   ref_hostname = '" .     $db_r_host . "';";
+print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 	        $sth_w = $db_w->prepare($sql_w);
 	        $sth_w->execute;
 	        $arr_w_ref = $sth_w->fetchrow_arrayref;
