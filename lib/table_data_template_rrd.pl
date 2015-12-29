@@ -85,7 +85,7 @@ sub copy_table_data_template_rrd {
 		$sth_w->finish;
 
 		$sql_w = "select id from data_local where ref_id = '" . $TABLE_local_data_id . "' and ref_hostname = '" . $db_r_host . "';";
-		print "SQL = " . $sql_w . "\n";
+		print "SQL(data_template_rrd:DEBUG) = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
