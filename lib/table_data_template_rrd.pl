@@ -33,25 +33,12 @@ sub copy_table_data_template_rrd {
 
 	print "***** Copy Table Name = data_template_rrd *****\n";
 
-#	$sql_r = "select
-#			data_template_rrd.id,
-#			data_template_rrd.hash,
-#			data_template_rrd.local_data_template_rrd_id,
-#			data_template_rrd.local_data_id,
-#			data_template_rrd.data_template_id,
-#			data_template_rrd.rrd_maximum,
-#			data_template_rrd.rrd_minimum,
-#			data_template_rrd.rrd_heartbeat,
-#			data_template_rrd.data_source_type_id,
-#			data_template_rrd.data_source_name,
-#			data_template_rrd.data_input_field_id
-#		from data_template_rrd, data_local
-#	        where data_template_rrd.local_data_id = data_local.id ;";
 	$sql_r = "select
 			data_template_rrd_1.id,
 			data_template_rrd_2.hash,
 			data_template_rrd_1.local_data_id,
 			data_template.hash,
+			data_template_rrd_1.data_template_id,
 			data_template_rrd_1.rrd_maximum,
 			data_template_rrd_1.rrd_minimum,
 			data_template_rrd_1.rrd_heartbeat,
@@ -74,6 +61,7 @@ sub copy_table_data_template_rrd {
 			$TABLE_hash,
 			$TABLE_local_data_id,
 			$data_template_hash,
+			$TABLE_data_template_id,
 			$TABLE_rrd_maximum,
 			$TABLE_rrd_minimum,
 			$TABLE_rrd_heartbeat,
@@ -97,6 +85,7 @@ sub copy_table_data_template_rrd {
 		$sth_w->finish;
 
 		$sql_w = "select id from data_local where ref_id = '" . $TABLE_local_data_id . "' and ref_hostname = '" . $db_r_host . "';";
+		print "SQL = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
@@ -115,7 +104,7 @@ sub copy_table_data_template_rrd {
 	        $arr_w_ref = $sth_w->fetchrow_arrayref;
 	        my ($data_template_rrd_duplicate) = @$arr_w_ref;
 	        $sth_w->finish;
-print "SQL = " . $sql_w . "\n";
+# print "SQL = " . $sql_w . "\n";
 	        if($data_template_rrd_duplicate == 0) {
 	                $sql_w = "insert into data_template_rrd (
 	        		hash,
