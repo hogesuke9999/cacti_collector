@@ -28,7 +28,7 @@ sub copy_table_data_local {
 			data_local.host_id,
 			data_local.snmp_query_id,
 			data_local.snmp_index
-		from data_local, data_template, snmp_query
+		from data_local, data_template
 		where data_local.data_template_id = data_template.id;";
 
 #	$sql_r = "select
@@ -61,21 +61,25 @@ sub copy_table_data_local {
 		my ($data_template_id) = @$arr_w_ref;
 		$sth_w->finish;
 
-		$sql_r2 = "select hash from snmp_query where hash = '" . $TABLE_snmp_query_id . "';";
-		print "SQL(data_local:DEBUG) = " . $sql_r2 . "\n";
-		$sth_r2 = $db_r->prepare($sql_r2);
-		$sth_r2->execute;
-		$arr_r2_ref = $sth_r2->fetchrow_arrayref;
-		my ($TABLE_snmp_query_hash) = @$arr_r2_ref;
-		$sth_r2->finish;
+		if($TABLE_snmp_query_id == 0) {
+			my $snmp_query_id = '';
+		} else {
+			$sql_r2 = "select hash from snmp_query where hash = '" . $TABLE_snmp_query_id . "';";
+			print "SQL(data_local:DEBUG) = " . $sql_r2 . "\n";
+			$sth_r2 = $db_r->prepare($sql_r2);
+			$sth_r2->execute;
+			$arr_r2_ref = $sth_r2->fetchrow_arrayref;
+			my ($TABLE_snmp_query_hash) = @$arr_r2_ref;
+			$sth_r2->finish;
 
-		$sql_w = "select id from snmp_query where hash = '" . $TABLE_snmp_query_hash . "';";
-		print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
-		$sth_w = $db_w->prepare($sql_w);
-		$sth_w->execute;
-		$arr_w_ref = $sth_w->fetchrow_arrayref;
-		my ($snmp_query_id) = @$arr_w_ref;
-		$sth_w->finish;
+			$sql_w = "select id from snmp_query where hash = '" . $TABLE_snmp_query_hash . "';";
+			print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
+			$sth_w = $db_w->prepare($sql_w);
+			$sth_w->execute;
+			$arr_w_ref = $sth_w->fetchrow_arrayref;
+			my ($snmp_query_id) = @$arr_w_ref;
+			$sth_w->finish;
+		}
 
 		# 変換後のhost_idの取得
 		#  変換前 : $TABLE_host_id
