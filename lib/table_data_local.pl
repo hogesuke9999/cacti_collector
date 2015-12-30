@@ -53,8 +53,14 @@ sub copy_table_data_local {
 			$TABLE_snmp_index
 		) = @$arr_ref;
 
+print "(data_local:DEBUG)TABLE_id = " .                 $TABLE_id . "\n";
+print "(data_local:DEBUG)TABLE_data_template_hash = " . $TABLE_data_template_hash . "\n";
+print "(data_local:DEBUG)TABLE_host_id = " .            $TABLE_host_id . "\n";
+print "(data_local:DEBUG)TABLE_snmp_query_id = " .      $TABLE_snmp_query_id . "\n";
+print "(data_local:DEBUG)TABLE_snmp_index = " .         $TABLE_snmp_index . "\n";
+
 		$sql_w = "select id from data_template where hash = '" . $TABLE_data_template_hash . "';";
-# print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
+print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		$arr_w_ref = $sth_w->fetchrow_arrayref;
@@ -62,8 +68,10 @@ sub copy_table_data_local {
 		$sth_w->finish;
 
 		if($TABLE_snmp_query_id == 0) {
+print "data_local : TABLE_snmp_query_id = 0\n";
 			my $snmp_query_id = '0';
 		} else {
+print "data_local : TABLE_snmp_query_id > 0\n";
 			$sql_r2 = "select hash from snmp_query where id = '" . $TABLE_snmp_query_id . "';";
 			print "SQL(data_local:DEBUG) = " . $sql_r2 . "\n";
 			$sth_r2 = $db_r->prepare($sql_r2);
