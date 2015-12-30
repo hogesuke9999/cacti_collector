@@ -69,7 +69,7 @@ print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
 
 		if($TABLE_snmp_query_id == 0) {
 print "data_local : TABLE_snmp_query_id = 0\n";
-			my $snmp_query_id = '0';
+			$snmp_query_id = '0';
 		} else {
 print "data_local : TABLE_snmp_query_id > 0\n";
 			$sql_r2 = "select hash from snmp_query where id = '" . $TABLE_snmp_query_id . "';";
@@ -77,7 +77,7 @@ print "data_local : TABLE_snmp_query_id > 0\n";
 			$sth_r2 = $db_r->prepare($sql_r2);
 			$sth_r2->execute;
 			$arr_r2_ref = $sth_r2->fetchrow_arrayref;
-			my ($TABLE_snmp_query_hash) = @$arr_r2_ref;
+			($TABLE_snmp_query_hash) = @$arr_r2_ref;
 			$sth_r2->finish;
 print "data_local : TABLE_snmp_query_hash = " . $TABLE_snmp_query_hash . "\n";
 
@@ -86,7 +86,7 @@ print "data_local : TABLE_snmp_query_hash = " . $TABLE_snmp_query_hash . "\n";
 			$sth_w = $db_w->prepare($sql_w);
 			$sth_w->execute;
 			$arr_w_ref = $sth_w->fetchrow_arrayref;
-			my ($snmp_query_id) = @$arr_w_ref;
+			($snmp_query_id) = @$arr_w_ref;
 			$sth_w->finish;
 print "data_local : snmp_query_id = " . $snmp_query_id . "\n";
 		}
