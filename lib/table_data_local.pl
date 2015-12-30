@@ -90,6 +90,7 @@ print "data_local : TABLE_snmp_query_hash = " . $TABLE_snmp_query_hash . "\n";
 			$sth_w->finish;
 print "data_local : snmp_query_id = " . $snmp_query_id . "\n";
 		}
+print "data_local : snmp_query_id = " . $snmp_query_id . "\n";
 
 		# 変換後のhost_idの取得
 		#  変換前 : $TABLE_host_id
