@@ -62,9 +62,9 @@ sub copy_table_data_local {
 		$sth_w->finish;
 
 		if($TABLE_snmp_query_id == 0) {
-			my $snmp_query_id = '';
+			my $snmp_query_id = '0';
 		} else {
-			$sql_r2 = "select hash from snmp_query where hash = '" . $TABLE_snmp_query_id . "';";
+			$sql_r2 = "select hash from snmp_query where id = '" . $TABLE_snmp_query_id . "';";
 			print "SQL(data_local:DEBUG) = " . $sql_r2 . "\n";
 			$sth_r2 = $db_r->prepare($sql_r2);
 			$sth_r2->execute;
