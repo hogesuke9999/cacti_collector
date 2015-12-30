@@ -79,6 +79,7 @@ print "data_local : TABLE_snmp_query_id > 0\n";
 			$arr_r2_ref = $sth_r2->fetchrow_arrayref;
 			my ($TABLE_snmp_query_hash) = @$arr_r2_ref;
 			$sth_r2->finish;
+print "data_local : TABLE_snmp_query_hash = " . $TABLE_snmp_query_hash . "\n";
 
 			$sql_w = "select id from snmp_query where hash = '" . $TABLE_snmp_query_hash . "';";
 			print "SQL(data_local:DEBUG) = " . $sql_w . "\n";
@@ -87,6 +88,7 @@ print "data_local : TABLE_snmp_query_id > 0\n";
 			$arr_w_ref = $sth_w->fetchrow_arrayref;
 			my ($snmp_query_id) = @$arr_w_ref;
 			$sth_w->finish;
+print "data_local : snmp_query_id = " . $snmp_query_id . "\n";
 		}
 
 		# 変換後のhost_idの取得
