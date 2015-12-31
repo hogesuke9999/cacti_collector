@@ -62,11 +62,11 @@ sub copy_table_graph_local {
 			$TABLE_snmp_index
 		) = @$arr_ref;
 
-print "DEBUG:data_graph_local TABLE_id = "                   . $TABLE_id                   . "\n";
-print "DEBUG:data_graph_local TABLE_graph_templates_hash = " . $TABLE_graph_templates_hash . "\n";
-print "DEBUG:data_graph_local TABLE_host_id = "              . $TABLE_host_id              . "\n";
-print "DEBUG:data_graph_local TABLE_snmp_query_id = "        . $TABLE_snmp_query_id        . "\n";
-print "DEBUG:data_graph_local TABLE_snmp_index = "           . $TABLE_snmp_index           . "\n";
+print "DEBUG:graph_local TABLE_id = "                   . $TABLE_id                   . "\n";
+print "DEBUG:graph_local TABLE_graph_templates_hash = " . $TABLE_graph_templates_hash . "\n";
+print "DEBUG:graph_local TABLE_host_id = "              . $TABLE_host_id              . "\n";
+print "DEBUG:graph_local TABLE_snmp_query_id = "        . $TABLE_snmp_query_id        . "\n";
+print "DEBUG:graph_local TABLE_snmp_index = "           . $TABLE_snmp_index           . "\n";
 
 		# 変換後のhost_idの取得
 		#  変換前 : $TABLE_host_id
@@ -78,12 +78,13 @@ print "DEBUG:data_graph_local TABLE_snmp_index = "           . $TABLE_snmp_index
 		my ($NEW_host_id) = @$arr_w_ref;
 		$sth_w->finish;
 
-		$sql_w = "select id from graph_templates where hash = '';";
+		$sql_w = "select id from graph_templates where hash = '" . $TABLE_graph_templates_hash . "';";
 		$sth_w = $db_w->prepare($sql_w);
 		$sth_w->execute;
 		my $arr_w_ref = $sth_w->fetchrow_arrayref;
 		my ($graph_template_id) = @$arr_w_ref;
 		$sth_w->finish;
+print "DEBUG:graph_local graph_template_id = " . $graph_template_id . "\n";
 
 		if($TABLE_snmp_query_id == 0) {
 			$snmp_query_id = 0;
@@ -103,7 +104,7 @@ print "DEBUG:data_graph_local TABLE_snmp_index = "           . $TABLE_snmp_index
 			$sth_w->finish;
 		}
 
-print "DEBUG:data_graph_local snmp_query_id = " . $snmp_query_id . "\n";
+print "DEBUG:graph_local snmp_query_id = " . $snmp_query_id . "\n";
 
 	        $sql_w = "select count(*) from graph_local
 	        where host_id = '" .           $NEW_host_id . "'
