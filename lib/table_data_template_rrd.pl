@@ -70,17 +70,17 @@ sub copy_table_data_template_rrd {
 			$TABLE_data_input_field_id
 		) = @$arr_ref;
 
-print "DEBUG:data_template_rrd TABLE_id" .                  $TABLE_id                  . "\n";
-print "DEBUG:data_template_rrd TABLE_hash" .                $TABLE_hash                . "\n";
-print "DEBUG:data_template_rrd TABLE_local_data_id" .       $TABLE_local_data_id       . "\n";
-print "DEBUG:data_template_rrd data_template_hash" .        $data_template_hash        . "\n";
-print "DEBUG:data_template_rrd TABLE_data_template_id" .    $TABLE_data_template_id    . "\n";
-print "DEBUG:data_template_rrd TABLE_rrd_maximum" .         $TABLE_rrd_maximum         . "\n";
-print "DEBUG:data_template_rrd TABLE_rrd_minimum" .         $TABLE_rrd_minimum         . "\n";
-print "DEBUG:data_template_rrd TABLE_rrd_heartbeat" .       $TABLE_rrd_heartbeat       . "\n";
-print "DEBUG:data_template_rrd TABLE_data_source_type_id" . $TABLE_data_source_type_id . "\n";
-print "DEBUG:data_template_rrd TABLE_data_source_name" .    $TABLE_data_source_name    . "\n";
-print "DEBUG:data_template_rrd TABLE_data_input_field_id" . $TABLE_data_input_field_id . "\n";
+print "DEBUG:data_template_rrd TABLE_id = " .                  $TABLE_id                  . "\n";
+print "DEBUG:data_template_rrd TABLE_hash = " .                $TABLE_hash                . "\n";
+print "DEBUG:data_template_rrd TABLE_local_data_id = " .       $TABLE_local_data_id       . "\n";
+print "DEBUG:data_template_rrd data_template_hash = " .        $data_template_hash        . "\n";
+print "DEBUG:data_template_rrd TABLE_data_template_id = " .    $TABLE_data_template_id    . "\n";
+print "DEBUG:data_template_rrd TABLE_rrd_maximum = " .         $TABLE_rrd_maximum         . "\n";
+print "DEBUG:data_template_rrd TABLE_rrd_minimum = " .         $TABLE_rrd_minimum         . "\n";
+print "DEBUG:data_template_rrd TABLE_rrd_heartbeat = " .       $TABLE_rrd_heartbeat       . "\n";
+print "DEBUG:data_template_rrd TABLE_data_source_type_id = " . $TABLE_data_source_type_id . "\n";
+print "DEBUG:data_template_rrd TABLE_data_source_name = " .    $TABLE_data_source_name    . "\n";
+print "DEBUG:data_template_rrd TABLE_data_input_field_id = " . $TABLE_data_input_field_id . "\n";
 
 		$sql_w = "select id from data_template_rrd where hash = '" . $TABLE_hash . "';";
 		$sth_w = $db_w->prepare($sql_w);
@@ -117,6 +117,7 @@ print "DEBUG:data_template_rrd TABLE_data_input_field_id" . $TABLE_data_input_fi
 	        my ($data_template_rrd_duplicate) = @$arr_w_ref;
 	        $sth_w->finish;
 # print "SQL = " . $sql_w . "\n";
+print "$data_template_rrd_duplicate = " . $data_template_rrd_duplicate . "\n";
 	        if($data_template_rrd_duplicate == 0) {
 	                $sql_w = "insert into data_template_rrd (
 	        		hash,
@@ -147,6 +148,35 @@ print "DEBUG:data_template_rrd TABLE_data_input_field_id" . $TABLE_data_input_fi
 	        	);";
 	        	print "SQL -> ", $sql_w, "\n";
 	        	$db_w->do($sql_w);
+		} else {
+			$sql_w = "insert into data_template_rrd (
+				hash,
+				local_data_template_rrd_id,
+				local_data_id,
+				data_template_id,
+				rrd_maximum,
+				rrd_minimum,
+				rrd_heartbeat,
+				data_source_type_id,
+				data_source_name,
+				data_input_field_id,
+				ref_id,
+				ref_hostname
+			) values (
+				'" . $TABLE_hash . "',
+				'" . $local_data_template_rrd_id . "',
+				'" . $local_data_id . "',
+				'" . $data_template_id . "',
+				'" . $TABLE_rrd_maximum . "',
+				'" . $TABLE_rrd_minimum . "',
+				'" . $TABLE_rrd_heartbeat . "',
+				'" . $TABLE_data_source_type_id . "',
+				'" . $TABLE_data_source_name . "',
+				'" . $TABLE_data_input_field_id . "',
+				'" . $TABLE_id . "',
+				'" . $db_r_host . "'
+			);";
+			print "SQL -> ", $sql_w, "\n";
 	        }
 	}
 	$sth_r->finish;
