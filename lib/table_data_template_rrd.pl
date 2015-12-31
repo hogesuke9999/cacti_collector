@@ -117,7 +117,7 @@ print "DEBUG:data_template_rrd TABLE_data_input_field_id = " . $TABLE_data_input
 	        my ($data_template_rrd_duplicate) = @$arr_w_ref;
 	        $sth_w->finish;
 # print "SQL = " . $sql_w . "\n";
-print "$data_template_rrd_duplicate = " . $data_template_rrd_duplicate . "\n";
+print "data_template_rrd_duplicate = " . $data_template_rrd_duplicate . "\n";
 	        if($data_template_rrd_duplicate == 0) {
 	                $sql_w = "insert into data_template_rrd (
 	        		hash,
@@ -133,7 +133,7 @@ print "$data_template_rrd_duplicate = " . $data_template_rrd_duplicate . "\n";
 	        		ref_id,
 	        		ref_hostname
 	        	) values (
-	        		'" . $TABLE_hash . "',
+	        		'',
 	        		'" . $local_data_template_rrd_id . "',
 	        		'" . $local_data_id . "',
 	        		'" . $data_template_id . "',
@@ -163,7 +163,7 @@ print "$data_template_rrd_duplicate = " . $data_template_rrd_duplicate . "\n";
 				ref_id,
 				ref_hostname
 			) values (
-				'" . $TABLE_hash . "',
+				'',
 				'" . $local_data_template_rrd_id . "',
 				'" . $local_data_id . "',
 				'" . $data_template_id . "',
