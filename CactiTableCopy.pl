@@ -18,6 +18,8 @@ require "./lib/table_graph_templates_item.pl";
 require "./lib/table_data_input_data.pl";
 require "./lib/table_data_template_data_rra.pl";
 require "./lib/table_poller_item.pl";
+
+# 各テーブル削除用モジュールの読み込み
 require "./lib/delete_table_graph_templates_item.pl";
 require "./lib/delete_table_data_local.pl";
 require "./lib/delete_table_data_template_data.pl";
@@ -25,6 +27,10 @@ require "./lib/delete_table_data_template_rrd.pl";
 require "./lib/delete_table_graph_local.pl";
 require "./lib/delete_table_graph_templates_graph.pl";
 require "./lib/delete_table_host.pl";
+
+# 各テーブルマージ用モジュールの読み込み
+require "./lib/merge_table_data_template_rrd.pl";
+
 
 # 書き込み用の接続設定
 my $db_w_user = 'cacti';
@@ -89,6 +95,9 @@ for my $Collect_host_name (sort keys %$Collect_host) {
 	&delete_table_graph_local($db_w, $db_r, $db_r_host);
 	&delete_table_graph_templates_graph($db_w, $db_r, $db_r_host);
 	&delete_table_host($db_w, $db_r, $db_r_host);
+
+	# データマージ処理
+	&merge_table_data_template_rrd($db_w, $db_r, $db_r_host);
 
 	# 読み込み用接続 (コピー先) の切断
 	$db_r->disconnect or warn $db_r->errstr;
