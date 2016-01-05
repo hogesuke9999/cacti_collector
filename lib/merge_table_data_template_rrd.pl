@@ -94,7 +94,7 @@ sub merge_table_data_template_rrd {
 				'" . $TABLE_rrd_minimum . "',
 				'" . $TABLE_rrd_heartbeat . "',
 				'" . $TABLE_data_source_type_id . "',
-				'" . aa$TABLE_data_source_namea . "',
+				'" . $TABLE_data_source_namea . "',
 				'" . $TABLE_data_input_field_id . "',
 	        		'" . $TABLE_id . "',
 	        		'" . $db_r_host . "'
