@@ -71,7 +71,7 @@ sub merge_table_data_template_rrd {
 		my ($data_template_rrd_hash_duplicate) = @$arr_w_ref;
 		$sth_w->finish;
 
-	        if($data_template_rrd_duplicate == 0) {
+	        if($data_template_rrd_hash_duplicate == 0) {
 			$sql_w = "insert into data_template_rrd (
 					hash,
 					local_data_template_rrd_id,
