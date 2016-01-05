@@ -72,7 +72,6 @@ sub merge_table_data_template_rrd {
 		$sth_w->finish;
 
 	        if($data_template_rrd_duplicate == 0) {
-
 			$sql_w = "insert into data_template_rrd (
 					hash,
 					local_data_template_rrd_id,
@@ -83,7 +82,7 @@ sub merge_table_data_template_rrd {
 					rrd_heartbeat,
 					data_source_type_id,
 					data_source_name,
-					data_input_field_id
+					data_input_field_id,
 					ref_id,
 		        		ref_hostname
 	        	) values (
